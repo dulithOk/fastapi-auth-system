@@ -14,6 +14,20 @@ pipeline {
             }
         }
 
+        stage('Create ENV File') {
+            steps {
+                withCredentials([
+                    string(credentialsId: 'DATABASE_URL', variable: 'DATABASE_URL'),
+                    string(credentialsId: 'DATABASE_URL_SYNC', variable: 'DATABASE_URL_SYNC')
+                ]) {
+                    sh '''
+                    echo "DATABASE_URL=$DATABASE_URL" > .env
+                    echo "DATABASE_URL_SYNC=$DATABASE_URL_SYNC" >> .env
+                    '''
+                }
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
                 sh '''
