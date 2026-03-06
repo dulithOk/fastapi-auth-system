@@ -17,8 +17,8 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 sh '''
-                docker compose down || true
-                docker compose build
+                docker-compose down || true
+                docker-compose build
                 '''
             }
         }
@@ -26,7 +26,7 @@ pipeline {
         stage('Start Containers') {
             steps {
                 sh '''
-                docker compose up -d
+                docker-compose up -d
                 '''
             }
         }
