@@ -18,11 +18,13 @@ pipeline {
             steps {
                 withCredentials([
                     string(credentialsId: 'DATABASE_URL', variable: 'DATABASE_URL'),
-                    string(credentialsId: 'DATABASE_URL_SYNC', variable: 'DATABASE_URL_SYNC')
+                    string(credentialsId: 'DATABASE_URL_SYNC', variable: 'DATABASE_URL_SYNC'),
+                    string(credentialsId: 'SECRET_KEY', variable: 'SECRET_KEY')
                 ]) {
                     sh '''
                     echo "DATABASE_URL=$DATABASE_URL" > .env
                     echo "DATABASE_URL_SYNC=$DATABASE_URL_SYNC" >> .env
+                    echo "SECRET_KEY=$SECRET_KEY" >> .env
                     '''
                 }
             }
